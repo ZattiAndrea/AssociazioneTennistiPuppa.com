@@ -1,0 +1,698 @@
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1a4d2e;
+    --secondary-color: #ffd700;
+    --accent-color: #2d7a4e;
+    --text-light: #f4f4f4;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+/* Animazioni Globali */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px var(--secondary-color); }
+    50% { box-shadow: 0 0 20px var(--secondary-color), 0 0 30px var(--secondary-color); }
+    100% { box-shadow: 0 0 5px var(--secondary-color); }
+}
+
+/* Header Avanzato */
+header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px var(--shadow);
+    transition: var(--transition);
+}
+
+header.scrolled {
+    padding: 0.5rem 0;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(26, 77, 46, 0.95) 0%, rgba(45, 122, 78, 0.95) 100%);
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.logo::before {
+    content: '🎾';
+    display: inline-block;
+    animation: bounce 2s infinite;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    animation: slideInRight 0.6s ease-out;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    transition: var(--transition);
+    padding: 5px 0;
+}
+
+.nav-menu a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::before,
+.nav-menu a.active::before {
+    width: 100%;
+}
+
+.nav-menu a:hover {
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Hamburger Menu Animato */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 3px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Hero Section Avanzata */
+.hero {
+    margin-top: 70px;
+    background: linear-gradient(rgba(26, 77, 46, 0.8), rgba(26, 77, 46, 0.8)), 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23fff" width="1200" height="600"/><path fill="%231a4d2e" d="M0 300L50 275L100 325L150 250L200 350L250 275L300 325L350 300L400 275L450 325L500 250L550 350L600 300L650 325L700 275L750 350L800 250L850 325L900 275L950 300L1000 325L1050 275L1100 350L1150 250L1200 300V600H0V300Z"/></svg>');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: fadeIn 1s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    animation: fadeIn 1s ease-out 0.3s both;
+    position: relative;
+    z-index: 1;
+}
+
+/* Palla da tennis animata */
+.tennis-ball {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #ccff00, #99cc00);
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    animation: floatBall 6s ease-in-out infinite;
+}
+
+@keyframes floatBall {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(100px, -30px) rotate(90deg); }
+    50% { transform: translate(-50px, -60px) rotate(180deg); }
+    75% { transform: translate(-100px, -30px) rotate(270deg); }
+}
+
+/* Content Sections con Effetti */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 20px;
+}
+
+.content-section {
+    background: white;
+    padding: 3rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+    display: none;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.content-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+    opacity: 0.05;
+    transition: transform 0.6s ease;
+}
+
+.content-section:hover::before {
+    transform: translate(50%, 50%);
+}
+
+.content-section.active {
+    display: block;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.content-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.content-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--accent-color);
+    transition: width 0.5s ease;
+}
+
+.content-section.active h2::after {
+    width: 100%;
+}
+
+/* Storia Section Animata */
+.storia-section p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.storia-section p:nth-child(2) { animation-delay: 0.1s; }
+.storia-section p:nth-child(3) { animation-delay: 0.2s; }
+.storia-section p:nth-child(4) { animation-delay: 0.3s; }
+.storia-section p:nth-child(5) { animation-delay: 0.4s; }
+.storia-section p:nth-child(6) { animation-delay: 0.5s; }
+
+/* Classifica Table Interattiva */
+.classifica-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.classifica-table th,
+.classifica-table td {
+    padding: 15px;
+    text-align: left;
+}
+
+.classifica-table th {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.classifica-table tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #eee;
+}
+
+.classifica-table tbody tr:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.classifica-table .posizione {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.classifica-table tr:nth-child(1) .posizione { color: #FFD700; }
+.classifica-table tr:nth-child(2) .posizione { color: #C0C0C0; }
+.classifica-table tr:nth-child(3) .posizione { color: #CD7F32; }
+
+/* Albo d'Oro Cards */
+.albo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.albo-card {
+    background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 3px solid var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.albo-card::before {
+    content: '🏆';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 80px;
+    opacity: 0.1;
+    transform: rotate(-15deg);
+}
+
+.albo-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    animation: glow 1s ease-in-out;
+}
+
+.albo-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.albo-card .year {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Tornei Cards Animate */
+.torneo-card {
+    background: linear-gradient(to right, #f8f8f8 0%, white 100%);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+    border-left: 5px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.torneo-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.torneo-card:hover::after {
+    left: 100%;
+}
+
+.torneo-card:hover {
+    transform: translateX(10px);
+    box-shadow: -5px 5px 20px rgba(0,0,0,0.1);
+}
+
+.torneo-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.torneo-card .date {
+    color: #666;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.torneo-card .date::before {
+    content: '📅';
+}
+
+/* Negozio Grid Effetti 3D */
+.negozio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.product-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.product-card:hover::before {
+    transform: translateX(100%);
+}
+
+.product-card:hover {
+    transform: translateY(-10px) rotateX(5deg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.product-image {
+    height: 200px;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.product-card:hover .product-info h3 {
+    color: var(--accent-color);
+}
+
+.product-price {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+}
+
+.product-price::after {
+    content: '✨';
+    position: absolute;
+    right: -25px;
+    top: 0;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+/* Footer Animato */
+footer {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    text-align: center;
+    padding: 3rem 0;
+    margin-top: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: white;
+    transform: skewY(-3deg);
+}
+
+footer p {
+    position: relative;
+    z-index: 1;
+    margin: 0.5rem 0;
+}
+
+/* Loading Animation */
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 9999;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Particelle Fluttuanti */
+.particle {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: float-particle 10s linear infinite;
+}
+
+@keyframes float-particle {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .nav-menu.active {
+        left: 0;
+        animation: slideInLeft 0.3s ease-out;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .content-section {
+        padding: 1.5rem;
+    }
+
+    .albo-grid,
+    .negozio-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
